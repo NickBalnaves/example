@@ -6,3 +6,4 @@ Gift Card shopping
 
 - Uses current Flutter stable channel
 - Run: flutter run
+- Login is hard coded to only work for username: "nick", password: "1234"
