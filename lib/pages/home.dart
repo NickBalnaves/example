@@ -4,6 +4,7 @@ import 'package:gift_card_shopping/constants/routes.dart';
 import 'package:gift_card_shopping/models.dart/gift_card.dart';
 import 'package:gift_card_shopping/providers/cart.dart';
 import 'package:gift_card_shopping/providers/user.dart';
+import 'package:gift_card_shopping/services/zip_api.dart';
 import 'package:provider/provider.dart';
 
 /// Home page
@@ -146,7 +147,7 @@ class _GiftCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FutureBuilder<List<GiftCard>>(
-        future: getGiftCards(),
+        future: ZipApiService.instance.getGiftCards(),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
             return const Center(

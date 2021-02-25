@@ -1,16 +1,6 @@
-import 'package:gift_card_shopping/services/zip_api.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'gift_card.g.dart';
-
-Future<List<GiftCard>> getGiftCards() async => List<GiftCard>.from(
-      (await ZipApiService.instance.callAPI(
-        'giftcards/api/giftcards',
-      ))
-          .map(
-        (x) => GiftCard.fromJson(x as Map<String, dynamic>),
-      ),
-    );
 
 @JsonSerializable()
 class GiftCard {

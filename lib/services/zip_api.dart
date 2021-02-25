@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gift_card_shopping/models.dart/gift_card.dart';
 import 'package:http/http.dart';
 import 'package:retry/retry.dart';
 
@@ -33,7 +34,7 @@ class ZipApiService {
   static ZipApiService get instance => _instance;
 
   /// Wrapper for all API calls
-  Future<List> callAPI(String endpoint) async {
+  Future<List> _callAPI(String endpoint) async {
     try {
       final response = await retry(
         () => get('https://zip.co/$endpoint'),
@@ -62,4 +63,13 @@ class ZipApiService {
     }
     return [];
   }
+
+  Future<List<GiftCard>> getGiftCards() async => List<GiftCard>.from(
+        (await _callAPI(
+          'giftcards/api/giftcards',
+        ))
+            .map(
+          (x) => GiftCard.fromJson(x as Map<String, dynamic>),
+        ),
+      );
 }
